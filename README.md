@@ -10,7 +10,7 @@ Base on reddit
 
 ## Authors
 
-* **anhle** - *Initial work* - [PurpleBooth](https://github.com/anhle128)
+* **anhle** - *Initial work* - [anhle128](https://github.com/anhle128)
 
 ## License
 
