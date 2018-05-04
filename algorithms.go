@@ -1,11 +1,21 @@
 package algorithms
 
 import (
+	"fmt"
 	"math"
 	"time"
+
+	"github.com/patrickmn/go-cache"
 )
 
 var epoch = time.Date(2018, time.January, 1, 0, 0, 0, 0, time.UTC)
+
+var c *cache.Cache
+
+func init() {
+	fmt.Println("call algorithms.init()")
+	c = cache.New(cache.NoExpiration, cache.NoExpiration)
+}
 
 func epochSeconds(date time.Time) float64 {
 	td := date.Sub(epoch)
@@ -86,5 +96,13 @@ func Confidence(ups, downs float64) float64 {
 	if ups+downs == 0 {
 		return 0
 	}
-	return _confidence(ups, downs)
+	key := fmt.Sprintf("%f-%f", ups, downs)
+	result, found := c.Get(key)
+	if found {
+		return result.(float64)
+	}
+
+	confidenceScore := _confidence(ups, downs)
+	c.Set(key, confidenceScore, -1)
+	return confidenceScore
 }
