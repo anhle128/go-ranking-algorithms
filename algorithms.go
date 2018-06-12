@@ -13,7 +13,6 @@ var epoch = time.Date(1970, time.January, 1, 0, 0, 0, 0, time.UTC)
 var c *cache.Cache
 
 func init() {
-	fmt.Println("call algorithms.init()")
 	c = cache.New(cache.NoExpiration, cache.NoExpiration)
 }
 
